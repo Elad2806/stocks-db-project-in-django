@@ -1,0 +1,67 @@
+{% load static %}
+<link rel="stylesheet" href="{%  static 'style.css' %}">
+<div class="main">
+
+<p> Query 2: </p>
+<table class="main" border="1" width="40%">
+    <th>Symbol</th>
+    <th>Name</th>
+    <th>NumOfStocks</th>
+        {% for row in sql_res1 %}
+            <tr>
+            <td>{{ row.Symbol }} </td>
+            <td>{{ row.Name }} </td>
+            <td>{{ row.NumOfStocks }} </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+<p> Dominant Pokemons by type: </p>
+<table class="main" border="1" width="40%">
+    <th>Type</th>
+    <th>Name</th>
+        {% for pokemon in sql_res2 %}
+            <tr>
+            <td>{{ pokemon.Type }} </td>
+            <td>{{ pokemon.Name }} </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+<p> Types which have a Pokemon stronger than 'Attack Threshold' and their count is bigger than 'Pokemon Count':</p>
+<form method="POST">
+    {% csrf_token %}
+    Attack Threshold: <input type="number" min="0" name="Attack threshhold" rows="1" cols="50"><br>
+    Pokemon Count: <input type="number" min="0" name="Pokemon Count" rows="1" cols="50"><br>
+    <input type="submit">
+</form>
+
+<table class="main" border="1" width="40%">
+    <th>Type</th>
+        {% for pokemon in sql_res3 %}
+            <tr>
+            <td>{{ pokemon.Type }} </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+
+<p> Type with the highest average instability:</p>
+
+<table class="main" border="1" width="40%">
+    <th>Type</th>
+    <th>Average Instability</th>
+        {% for pokemon in sql_res4 %}
+            <tr>
+            <td>{{ pokemon.Type }} </td>
+            <td>{{ pokemon.AvgInstability }} </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+
+</div>
+
+<!-- Side navigation -->
+<div class="sidenav">
+<a href="home">Home</a><br>
+<a href="query_results">Query Results</a><br>
+<a href="add_transaction">Add Transaction</a><br>
+<a href="buy_stocks">Buy Stocks</a>
+</div>

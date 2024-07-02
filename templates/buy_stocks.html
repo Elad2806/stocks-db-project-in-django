@@ -1,0 +1,42 @@
+{% load static %}
+<link rel="stylesheet" href="{%  static 'style.css' %}">
+<div class="main">
+
+    <p> Make a Transaction:</p>
+     {% for message in sql_res3 %}
+             <h2>{{message}}</h2>
+            {% endfor %}
+
+    <form method="POST">
+        {% csrf_token %}
+        ID:  <input type="number"  name="ID" rows="1" cols="50" required><br>
+        Company: <textarea name="Symbol" rows="1" cols="50" required></textarea><br>
+        Quantity: <input type="number" min="1" name="BQuantity" rows="1" cols="50" required><br>
+        <input type="submit">
+    </form>
+    <h1>Top 10 most expensive purchases:</h1>
+</div>
+
+<table class="main" border="1" width="40%">
+    <th>Date</th>
+    <th>Investor ID</th>
+    <th>Company</th>
+    <th>Payed</th>
+        {% for row in sql_res5 %}
+            <tr>
+            <td>{{ row.tDate }} </td>
+            <td>{{ row.ID }} </td>
+            <td>{{ row.Symbol }} </td>
+            <td>{{ row.Payed }} </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+
+
+<!-- Side navigation -->
+<div class="sidenav">
+<a href="home">Home</a><br>
+<a href="query_results">Query Results</a><br>
+<a href="add_transaction">Add Transaction</a><br>
+<a href="buy_stocks">Buy Stocks</a>
+</div>
